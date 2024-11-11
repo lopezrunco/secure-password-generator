@@ -15,9 +15,21 @@ while True:
     except ValueError:
         print("Please, enter a valid number.") # Catch non-integer password.
 
+# Ensure password complexity 
+# (at least 1 lowercase, 1 uppercase, 1 digit and 1 special character).
+def is_complex(password):
+    return (any(character.islower() for character in password) and
+            any(character.isupper() for character in password) and
+            any(character.isdigit() for character in password) and
+            any(character in string.punctuation for character in password))
+
 # Generate letters, numbers and punctuation characters for the password.
 characters = string.ascii_letters + string.digits + string.punctuation
 
-password = "".join(random.choice(characters) for i in range(length))
+# Generate password until it meets complexity requeriments.
+while True:
+    password = "".join(random.choice(characters) for i in range(length))
+    if is_complex(password):
+        break # Exit if the password meets requeriments.
 
 print("The password is: " + password)

@@ -2,7 +2,7 @@ Features:
 
 [X] Input validation.
 [X] Check for empty passwords.
-[ ] Ensure password complexity.
+[X] Ensure password complexity.
 [ ] Cryptographic randomness.
 [ ] Add type of characters options.
 [ ] Generate password from input text.
