@@ -1,5 +1,5 @@
 import string
-import random
+import secrets
 
 # Validate input.
 while True:
@@ -15,20 +15,23 @@ while True:
     except ValueError:
         print("Please, enter a valid number.") # Catch non-integer password.
 
-# Ensure password complexity 
-# (at least 1 lowercase, 1 uppercase, 1 digit and 1 special character).
+# Ensure password complexity:
+# - At least 1 lowercase, 1 uppercase, 1 digit and 1 special character.
+# - Avoid consecutive repeated characters.
 def is_complex(password):
     return (any(character.islower() for character in password) and
             any(character.isupper() for character in password) and
             any(character.isdigit() for character in password) and
-            any(character in string.punctuation for character in password))
+            any(character in string.punctuation for character in password) and
+            not any(password[index] == password[index - 1] for index in range(1, len(password)))
+    )
 
 # Generate letters, numbers and punctuation characters for the password.
 characters = string.ascii_letters + string.digits + string.punctuation
 
 # Generate password until it meets complexity requeriments.
 while True:
-    password = "".join(random.choice(characters) for i in range(length))
+    password = "".join(secrets.choice(characters) for i in range(length))
     if is_complex(password):
         break # Exit if the password meets requeriments.
 
